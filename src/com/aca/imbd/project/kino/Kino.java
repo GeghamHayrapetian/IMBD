@@ -16,12 +16,14 @@ public   class Kino implements Serializable {
     private LocalDate premierDate;
     private List <? extends People> team=new ArrayList<>();
     private Genre genre;
-    private Repository <Integer,Kino> repository=new Repository<>("C:\\Users\\Gexam\\IdeaProjects\\Main\\files\\kino.txt");
+    private Repository <Integer,Kino> repository=new Repository<>("kino.txt");
     public  Integer id=0;
 
     public Kino(String title, Double rating) {
         this.title = title;
         this.rating = rating;
+        ++id;
+        this.addKino(id,this);
     }
 
     public Kino(String title, String description, Double rating, LocalDate premierDate, List<? extends People> team, Genre genre) {
@@ -32,6 +34,7 @@ public   class Kino implements Serializable {
         this.team = team;
         this.genre = genre;
         ++id;
+
     }
 
     public Kino() {
@@ -94,9 +97,9 @@ public   class Kino implements Serializable {
         }
         return team1;
     }
-    public void addKino(Kino kino)
+    public void addKino(Integer id, Kino kino)
     {
-        repository.put(id,kino);
+        repository.put(this.id,kino);
 
     }
     public Kino searchKinoByTitle(String title)
